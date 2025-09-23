@@ -51,3 +51,12 @@ docker-compose-check:
 	@$(DOCKER_COMPOSE) version >/dev/null 2>&1 || (echo "Please install docker compose binary or set DOCKER_COMPOSE=\"docker-compose\" for legacy binary" && exit 1)
 	@echo "You are using \"$(DOCKER_COMPOSE)\" binary"
 	@echo "Current version is \"$$($(DOCKER_COMPOSE) version)\""
+
+gen-cert:
+	@echo "👉 Generating self-signed certificate for weddingstore.io.vn..."
+	@mkdir -p docker/certs
+	@openssl req -x509 -nodes -days 365 -newkey rsa:2048 \
+	  -keyout docker/certs/sylius.key \
+	  -out docker/certs/sylius.crt \
+	  -subj "/CN=weddingstore.io.vn"
+	@echo "✅ Certificate generated: docker/certs/sylius.crt and sylius.key"
