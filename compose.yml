@@ -5,9 +5,9 @@ services:
         image: mysql:8.4
         platform: linux/amd64
         healthcheck:
-            test: '/usr/bin/mysql --execute "SHOW databases;"'
-            timeout: 3s
-            interval: 1s
+            test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-uroot"]
+            timeout: 5s
+            interval: 5s
             retries: 10
         environment:
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
