@@ -63,3 +63,11 @@ gen-cert:
 	  -out docker/certs/sylius.crt \
 	  -subj "/CN=weddingstore.io.vn"
 	@echo "✅ Certificate generated: docker/certs/sylius.crt and sylius.key"
+
+# Generate Let's Encrypt certificate with certbot (production)
+ssl-certbot:
+	mkdir -p docker/certs
+	certbot certonly --standalone -d $(DOMAIN)
+	@cp /etc/letsencrypt/live/$(DOMAIN)/fullchain.pem docker/certs/$(DOMAIN).crt
+	@cp /etc/letsencrypt/live/$(DOMAIN)/privkey.pem docker/certs/$(DOMAIN).key
+	@echo "✅ Let's Encrypt certificate issued and copied to docker/certs/"
