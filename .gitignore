@@ -15,6 +15,9 @@
 /compose.override.yaml
 /compose.override.yml
 /docker/mysql/data/
+/docker/certs/*.crt
+/docker/certs/*.key
+/docker/nginx/conf.d/default.conf
 
 ###> symfony/framework-bundle ###
 /composer.lock
